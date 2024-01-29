@@ -1,0 +1,137 @@
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список Продуктов</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <div class="border">
+            <div id="navigation">
+                <ul>
+                    <li><a href="/" class="active">Главная</a></li>
+                    <li><a href="/admin">Админ панель</a></li>
+                    <li><a href="{% url 'view_cart' %}">Корзина ({{ total_quantity }})</a></li>
+                    
+                </ul>
+            </div>
+            <header>
+                <h1>Список продуктов</h1>
+            </header>
+            {% for post in post_list %}
+            <ul>
+                <!-- Здесь будет генерироваться список продуктов -->
+                <!-- Пример для трех продуктов -->
+                <li>
+                    <a href="http://127.0.0.1:8000/category">
+                        <img src="{{ post.image.url }}" alt="{{ post.name }}">
+                        <h3>{{ post.name }}</h3>
+                        <p>{{ post.description }}</p>
+                        <p>Цена: {{ post.price }}</p>
+                    </a>
+                    <a href="{% url 'add_to_cart' post.id %}" class="add-to-cart">Добавить в корзину</a>
+                    </a>
+                </li>
+            </ul>
+            {% endfor %}
+            <div>
+            <h1>Корзина</h1>
+    <p>Общее количество товаров в корзине: {{ total_quantity }}</p>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.product.name }} - Количество: {{ item.quantity }}
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+        </div>
+        
+    </div>
+    <div class="footer">
+    <footer>
+        <p>&copy; 2024 Ваше название компании. Все права защищены.</p>
+    </footer>
+</div>
+</body>
+</html>
+{% endblock %}
+
+
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ваш код стилей и мета-тегов -->
+</head>
+<body>
+    <div id="header">
+        <a href="{% url 'product_list' %}">Главная</a>
+        <a href="{% url 'view_cart' %}">Корзина ({{ total_quantity }})</a>
+    </div>
+    
+    {% block content %}{% endblock %}
+    
+    <div id="footer">
+        <p>&copy; 2024 Ваше название компании. Все права защищены.</p>
+    </div>
+</body>
+</html>

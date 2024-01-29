@@ -1,0 +1,13 @@
+{% extends 'shop.html' %}
+
+{% block content %}
+    <h1>Корзина</h1>
+    <p>Общее количество товаров в корзине: {{ total_quantity }}</p>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.product.name }} - Количество: {{ item.quantity }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
